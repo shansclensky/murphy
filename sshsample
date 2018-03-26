@@ -6,7 +6,7 @@ ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
 try:
-    ssh.connect('localhost', username='testuser', password='t3st@#test123')
+    ssh.connect('localhost', username='root', password='t3st@#')
 
 except paramiko.SSHException:
     print "Connection Error"
