@@ -45,11 +45,18 @@ if __name__ == "__main__":
     port=int(sys.argv[2])
     username=sys.argv[3]
     password =sys.argv[4]
-    s1 = Sshclient(hostname,port,username,password)
-    a0= s1.get_cpuutilizaton()
-    a1= s1.get_memoryutilization()
-    a2=s1.get_portstatistics()
-    print a0,a1,a2
+    if --username!=username or hostname!=hostname:
+         print "invalid login"
+    else if --password==0: 
+         print"password missing "
+    else if --key_filename==0:
+         print"key_filename missing"
+    else:
+         s1 = Sshclient(hostname,port,username,password)
+         a0= s1.get_cpuutilizaton()
+         a1= s1.get_memoryutilization()
+         a2=s1.get_portstatistics()
+         print a0,a1,a2
    #print conn.__doc__
     
  
