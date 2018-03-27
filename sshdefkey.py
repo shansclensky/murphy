@@ -22,7 +22,7 @@ def conn(hostname,username,keyfile):
 if __name__ == "__main__":
     hostname=sys.argv[1]
     username=sys.argv[3]
-    keyfile =/opt/testkey.pem
+    keyfile =paramiko.RSAKey.from_private_key_file("/opt/testkey.pem")
     a=conn(hostname,username,keyfile)
     print a
     print conn.__doc__
