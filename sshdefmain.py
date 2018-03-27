@@ -53,11 +53,11 @@ if __name__ == "__main__":
     parser.add_argument('--password',help='enter the password',required=False)
     parser.add_argument('--key_filename',help='specify the key_filename path',required=False)
     args = vars(parser.parse_args())
-    if args[--username]!=username or args[--hostname]!=hostname:
-         print "invalid login"
-    elif args[--password]==0: 
+    if not(args['--username'] or args['--hostname']:
+         print "prime argument missing"
+    elif  not args['--password']: 
          print"password missing "
-    elif args[--key_filename]==0:
+    elif not args['--key_filename']:
          print"key_filename missing"
     else:
          s1 = Sshclient(hostname,port,username,password)
