@@ -8,7 +8,7 @@ import os
 #username=sys.argv[2]
 #password =sys.argv[3]
 #pdb.set_trace()
-<<<<<<< HEAD
+
 class Sshclient:
     def __init__(self,hostname=None,port=22,username=None,password=None,key_filename=None):
         #def conn(hostname,port,username,password,key_filename):
@@ -23,25 +23,6 @@ class Sshclient:
           self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
           self.ssh.connect(hostname=hostname,port=port , username=username,password=password)
  
-=======
-class sshclient:
-    def __init__(self,hostname=none,port=22,password=none,key_filename=none):
-    #def conn(hostname,port,username,password,key_filename):
-    """ connection to server is established and the output is read from server."""
-    if password==none:
-       self.ssh=paramiko.SSHClient()
-       self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-       self.ssh.connect(hostname=hostname,port=port , username=username,key_filename=key_filename)
-    else:
-       self.ssh=paramiko.SSHClient()
-       self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-       self.ssh.connect(hostname=hostname,port=port , username=username,password=password)
-
-    #username password do ssh or keypassed means do ssh accodingly  as specified in the 
-    self.ssh=paramiko.SSHClient()
-    self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    self.ssh.connect(hostname=hostname,port=port , username=username, password=password,key_filename=key_filename)
->>>>>>> 2cad32397a858252950566e31de0e170f6d0303c
     #stdin, stdout, stderr = rm.exec_command("")
     #stdout.read()
     
