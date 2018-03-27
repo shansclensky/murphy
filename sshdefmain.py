@@ -46,19 +46,13 @@ if __name__ == "__main__":
     password =sys.argv[4]
     key_filename="/opt/testkey.pem"
     s1 = sshclient(hostname,port,username,password,key_filename)
-    if argv[4]==0:
-       a0= s1.get_cpuutilizaton()
-       a1= s1.get_memoryutilization()
-       a2=s1.get_portstatistics()
-       print a0,a1,a2
-       #print conn.__doc__
+    a0= s1.get_cpuutilizaton()
+    a1= s1.get_memoryutilization()
+    a2=s1.get_portstatistics()
+    print a0,a1,a2
+   #print conn.__doc__
     
-    else:
-       b =comm(hostname,port,username,keyfile_name)
-       b0=s1.get_cpuutilizaton()
-       b1=s2.get_memoryutilization()
-       b2=s3.get_portstatistics()
-       print b0,b1,b2 
+ 
  
 
 
