@@ -30,5 +30,5 @@ if __name__ == "__main__":
     except:
        print "server not reachable wait for few seconds"
        time.sleep(10)        
-       
+       print "host is not responding unreachable" 
 
