@@ -1,8 +1,8 @@
 import os
 import paramiko
 import sys 
-import sys
-import paramiko
+
+
 #import pdb
 #function definition
 #def conn(host,port,username,password):
