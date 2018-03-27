@@ -1,6 +1,7 @@
 import sys
 import paramiko
 import os
+import argparse
 #import pdb
 #function definition
 #def conn(host,port,username,password):
@@ -42,14 +43,21 @@ class Sshclient:
         return port_info
 if __name__ == "__main__":
     hostname=sys.argv[1]
-    port=int(sys.argv[2])
-    username=sys.argv[3]
-    password =sys.argv[4]
-    if --username!=username or hostname!=hostname:
+    #port=int(sys.argv[2])
+    username=sys.argv[2]
+    password =sys.argv[3]
+    key_filename=sys.argv[4]
+    parser = argparse.ArgumentParser(description="validation for logging")
+    parser.add_argument('--hostname',help='enter valid hostname',required=True)
+    parser.add_argument('--username',help='enter valid username',required=True)
+    parser.add_argument('--password',help='enter the password',required=False)
+    parser.add_argument('--key_filename',help='specify the key_filename path',required=False)
+    args = vars(parser.parse_args())
+    if args[--username]!=username or args[--hostname]!=hostname:
          print "invalid login"
-    else if --password==0: 
+    elif args[--password]==0: 
          print"password missing "
-    else if --key_filename==0:
+    elif args[--key_filename]==0:
          print"key_filename missing"
     else:
          s1 = Sshclient(hostname,port,username,password)
