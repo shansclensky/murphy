@@ -1,7 +1,7 @@
 import os
 import paramiko
 import sys 
-
+import time
 
 #import pdb
 #function definition
@@ -23,8 +23,12 @@ if __name__ == "__main__":
     hostname=sys.argv[1]
     username=sys.argv[2]
     key_filename ="/opt/testkey.pem"
-    a=conn(hostname,username,key_filename)
-    print a
-    print conn.__doc__
-
+    try:
+       a=conn(hostname,username,key_filename)
+       print a
+       print conn.__doc__
+    except:
+       print "server not reachable wait for few seconds"
+       time.sleep(10)        
+       
 
