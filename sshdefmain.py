@@ -9,9 +9,18 @@ import os
 #password =sys.argv[3]
 #pdb.set_trace()
 class sshclient:
-    def __init__(self,hostname=10.16.86.156,port=22,password,key_filename):
+    def __init__(self,hostname=none,port=22,password=none,key_filename=none):
     #def conn(hostname,port,username,password,key_filename):
     """ connection to server is established and the output is read from server."""
+    if password==none:
+       self.ssh=paramiko.SSHClient()
+       self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+       self.ssh.connect(hostname=hostname,port=port , username=username,key_filename=key_filename)
+    else:
+       self.ssh=paramiko.SSHClient()
+       self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+       self.ssh.connect(hostname=hostname,port=port , username=username,password=password)
+
     #username password do ssh or keypassed means do ssh accodingly  as specified in the 
     self.ssh=paramiko.SSHClient()
     self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
