@@ -29,9 +29,27 @@ class Sshclient:
     #stdout.read()
     
     def get_cpuutilization(self):
-        stdin,stdout,stderr =self.ssh.exec_command("ls")
-        cpu_info=stdout.read()
-        return cpu_info
+        #stdin,stdout,stderr =self.ssh.exec_command("/proc/stat")
+        global last_worktime, last_idletime
+	f=open("/proc/stat","r")
+	line=""
+	while not "cpu " in line:
+              line=f.readline()
+	f.close()
+	d=line.split(" ")
+	worktime=int(d[2])+int(d[3])+int(d[4])
+	idletime=int(d[5])
+	dworktime=(worktime-last_worktime)
+	didletime=(idletime-last_idletime)
+	rate=float(dworktime)/(didletime+dworktime)
+	last_worktime=worktime
+	last_idletime=idletime
+	if(last_worktime==0):
+           return 0
+	else:
+           return rate
+        #cpu_info=stdout.read()
+        #return cpu_info
     
     def get_memoryutilization(self):
         stdin,stdout,stderr = self.ssh.exec_command("free -m")
@@ -39,8 +57,8 @@ class Sshclient:
         return memory_info
     
     def get_portstatistics(self):
-        stdin.stdout,stderr = self.ssh.exec_command("route -n")
-        port_info=stdout.read()
+        stdin,stdout,stderr = self.ssh.exec_command("netstat")
+        port_info=stdout.readlines()
         return port_info
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="validation for logging")
@@ -59,11 +77,11 @@ if __name__ == "__main__":
     else:
          s1 = Sshclient(hostname=args['hostname'], username=args['username'],password=args['password'])
          a0= s1.get_cpuutilization()
-         print a0
+         print("cpu_util : {0}".format(a0))
          a1= s1.get_memoryutilization()
-         print a1
+         print("mem_util : {0}".format(a1))
          a2=s1.get_portstatistics()
-         print a2
+         print("port_stat : {0}".format(a2))
    #print conn.__doc__
     
  
