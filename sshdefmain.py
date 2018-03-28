@@ -39,7 +39,7 @@ class Sshclient:
         return memory_info
     
     def get_portstatistics(self):
-        stdin.stdout,stderr = self.ssh.exec_command("netstat -i")
+        stdin.stdout,stderr = self.ssh.exec_command("route -n")
         port_info=stdout.read()
         return port_info
 if __name__ == "__main__":
