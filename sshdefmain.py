@@ -18,11 +18,11 @@ class Sshclient:
         if password==None:
           self.ssh=paramiko.SSHClient()
           self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-          self.ssh.connect(hostname=hostname,port=port , username=username,key_filename=key_filename)
+          self.ssh.connect(hostname=hostname,port=port, username=username,key_filename=key_filename)
         else:
           self.ssh=paramiko.SSHClient()
           self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-          self.ssh.connect(hostname=hostname,port=port , username=username,password=password)
+          self.ssh.connect(hostname=hostname,port=port, username=username,password=password)
  
     #stdin, stdout, stderr = rm.exec_command("")
     #stdout.read()
@@ -42,25 +42,21 @@ class Sshclient:
         port_info=stdout.read()
         return port_info
 if __name__ == "__main__":
-    hostname=sys.argv[1]
-    #port=int(sys.argv[2])
-    username=sys.argv[2]
-    password =sys.argv[3]
-    #key_filename=sys.argv[4]
     parser = argparse.ArgumentParser(description="validation for logging")
     parser.add_argument('--hostname',help='enter valid hostname',required=True)
     parser.add_argument('--username',help='enter valid username',required=True)
     parser.add_argument('--password',help='enter the password',required=False)
     #parser.add_argument('--key_filename',help='specify the key_filename path',required=False)
     args = vars(parser.parse_args())
-    if not(args['--username'] or args['--hostname']):
+    print args
+    if not(args['username'] or args['hostname']):
          print "prime argument missing"
-    elif  not args['--password']): 
+    elif  not(args['password']): 
          print"password missing "
     #elif not args['--key_filename']):
      #    print"key_filename missing"
     else:
-         s1 = Sshclient(hostname,port,username,password)
+         s1 = Sshclient(hostname=args['hostname'], username=args['username'],password=args['password'])
          a0= s1.get_cpuutilizaton()
          a1= s1.get_memoryutilization()
          a2=s1.get_portstatistics()
