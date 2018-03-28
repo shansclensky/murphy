@@ -31,11 +31,12 @@ class Sshclient:
     def get_cpuutilization(self):
         #stdin,stdout,stderr =self.ssh.exec_command("/proc/stat")
         global last_worktime, last_idletime
-	f=open("/proc/stat","r")
-	line=""
-	while not "cpu " in line:
-              line=f.readline()
-	f.close()
+	stdin,stdout,stderr = self.ssh.exec_command("cat /proc/stat \n")
+        pdb.set_trace()
+        line= stdout.read()
+
+        """while not "cpu " in line:
+             line=f.readline()
 	d=line.split(" ")
 	worktime=int(d[2])+int(d[3])+int(d[4])
 	idletime=int(d[5])
@@ -49,7 +50,7 @@ class Sshclient:
 	else:
            return rate
         #cpu_info=stdout.read()
-        #return cpu_info
+        #return cpu_info"""
     
     def get_memoryutilization(self):
         stdin,stdout,stderr = self.ssh.exec_command("free -m")
