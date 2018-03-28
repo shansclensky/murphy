@@ -1,3 +1,4 @@
+import pdb
 import sys
 import paramiko
 import os
@@ -28,12 +29,12 @@ class Sshclient:
     #stdout.read()
     
     def get_cpuutilization(self):
-        stdin,stdout,stderr =self.ssh.exec_command("top")
+        stdin,stdout,stderr =self.ssh.exec_command("ls")
         cpu_info=stdout.read()
         return cpu_info
     
     def get_memoryutilization(self):
-        stdin,stdout,stderr = self.ssh.exec_commad("free -m")
+        stdin,stdout,stderr = self.ssh.exec_command("free -m")
         memory_info=stdout.read()
         return memory_info
     
@@ -57,10 +58,12 @@ if __name__ == "__main__":
      #    print"key_filename missing"
     else:
          s1 = Sshclient(hostname=args['hostname'], username=args['username'],password=args['password'])
-         a0= s1.get_cpuutilizaton()
+         a0= s1.get_cpuutilization()
+         print a0
          a1= s1.get_memoryutilization()
+         print a1
          a2=s1.get_portstatistics()
-         print a0,a1,a2
+         print a2
    #print conn.__doc__
     
  
