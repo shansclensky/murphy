@@ -66,10 +66,22 @@ if __name__ == "__main__":
         print"keypair missing "
             
     else:
-        if agrs['imagename'] or args['flavorname'] or args['networkname'] not in 
-            
-          i1= Instance(instance=args['instance'], image=args['image'],flavor=args['flavor'],network=args['network'],keypair=args['keypair'])
-            
+          i1 =Instane(auth_url,username,password, project_name,user_domain_name,project_domain_name)
+          if agrs['imagename'] not in self.nova.images.list():
+                  print"enter a valid imagename"
+          else:
+              img1 = i1.image()
+          if agrs['flavorname'] not in self.nova.flavors.list():
+                  print"enter a valid flavorname"
+          else:
+               flav1=i1.flavor()
+          if agrs['networkname'] not in self.neutron.list_networks():
+                  print"enter a valid networkname"
+          else:
+              netw1=i1.network()
+          insta=i1.instance()
+          print"instance created suucessfully"
+                   
     
     
 
