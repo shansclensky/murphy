@@ -40,14 +40,16 @@ class Instance:
       def network(self,networkname):
           if:
             net=self.neutron.find_network(name=networkname)
-          return net
+            return net
           else:
             print "network not found"
           
-      def keypair(self):
-          key=self.nova.find_keypairs()
-          return key
-      
+      def keypair(self,keyname):
+          if:
+            key=self.nova.find_keypairs(name=keyname)
+            return key
+          else:
+            print"keyname not found"
      def instance(self):
           inst=nova.servers.create(name=None, image=img, flavor=flav,network = net,key_name=key)
           return inst  
@@ -79,7 +81,8 @@ if __name__ == "__main__":
                   print"enter a valid networkname"
           else:
               netw1=i1.network()
-          insta=i1.instance()
+          insta=i1.instance(name=None, image=img, flavor=flav,network = net,key_name=key)
+          print insta
           print"instance created suucessfully"
                    
     
