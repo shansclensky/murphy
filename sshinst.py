@@ -26,7 +26,7 @@ class Instance:
 
 
         def image(self):
-          self.image  
+          
               
 
 
