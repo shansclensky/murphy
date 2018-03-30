@@ -10,7 +10,7 @@ from neutronclient.v2_0 import client as neuclient
 
 
 class Instance:
-      def __init__(self,):
+      def __init__(self,auth_url, username,password, project_name,user_domain_name,project_domain_name):
           self.loader = loading.get_plugin_loader('password')
           self.auth = loader.load_from_options(auth_url=env['OS_AUTH_URL'],
                                 username=env['OS_USERNAME'],
@@ -41,7 +41,28 @@ class Instance:
           key=self.nova.keypairs.list()
           return key
       
-
+     def instance(self):
+          inst=nova.servers.create(name=None, image=img, flavor=flav,network = net,key_name=key)
+          return inst  
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="validation for logging")
+    parser.add_argument('--instance',help='enter valid instancename',required=True)
+    parser.add_argument('--image',help='enter valid imagename',required=True)
+    parser.add_argument('--flavor',help='enter valid flavorname',required=True)
+    parser.add_argument('--network',help='enter the networkname',required=True)
+    parser.add_argument('--keypair',help='enter the keypair',required=False)
+    args = vars(parser.parse_args())
+    print args
+    if not(args['instancename'] or args['imagename'] or args['flavorname'] or args['networkname']):
+        print "prime argument missing"
+    elif  not(args['keypair']): 
+         print"keypair missing "
+            
+    else:
+        i1= Instance(instance=args['instance'], image=args['image'],flavor=args['flavor'],network=args['network'],keypair=args['keypair'])
+            
+    
+    
 
 
 
