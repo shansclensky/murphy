@@ -10,7 +10,7 @@ from neutronclient.v2_0 import client as neuclient
 
 
 class Instance:
-      def __init__(self,image=None,flavor=None,network=None,key_name=None):
+      def __init__(self,):
           self.loader = loading.get_plugin_loader('password')
           self.auth = loader.load_from_options(auth_url=env['OS_AUTH_URL'],
                                 username=env['OS_USERNAME'],
@@ -25,9 +25,22 @@ class Instance:
           self.neutron=neuclient.Client(session=sess)   
 
 
-        def image(self):
+      def image(self):
+          img=self.nova.images.list()
+          return img
+      
+      def flavor(self):
+          flav=self.nova.flavors.list()
+          return flav
+      
+      def network(self):
+          net=self.neutron.networks.list()
+          return net
           
-              
+      def keypair(self):
+          key=self.nova.keypairs.list()
+          return key
+      
 
 
 
