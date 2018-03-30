@@ -25,20 +25,27 @@ class Instance:
           self.neutron=neuclient.Client(session=sess)   
 
 
-      def image(self):
-          img=self.nova.images.list()
-          return img
-      
-      def flavor(self):
-          flav=self.nova.flavors.list()
-          return flav
-      
-      def network(self):
-          net=self.neutron.networks.list()
+      def image(self,imagename):
+          if:
+            img=self.nova.find_image(name=imagename)
+             return img
+          else:
+             print "image not found"
+      def flavor(self,flavorname):
+          if:
+            flav=self.nova.find_flavor(name=flavorname)
+            return flav
+          else:
+             print "flavor not found"
+      def network(self,networkname):
+          if:
+            net=self.neutron.find_network(name=networkname)
           return net
+          else:
+            print "network not found"
           
       def keypair(self):
-          key=self.nova.keypairs.list()
+          key=self.nova.find_keypairs()
           return key
       
      def instance(self):
@@ -56,10 +63,12 @@ if __name__ == "__main__":
     if not(args['instancename'] or args['imagename'] or args['flavorname'] or args['networkname']):
         print "prime argument missing"
     elif  not(args['keypair']): 
-         print"keypair missing "
+        print"keypair missing "
             
     else:
-        i1= Instance(instance=args['instance'], image=args['image'],flavor=args['flavor'],network=args['network'],keypair=args['keypair'])
+        if agrs['imagename'] or args['flavorname'] or args['networkname'] not in 
+            
+          i1= Instance(instance=args['instance'], image=args['image'],flavor=args['flavor'],network=args['network'],keypair=args['keypair'])
             
     
     
