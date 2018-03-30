@@ -3,6 +3,7 @@ import sys
 import paramiko
 import os
 import argparse
+import re
 #import pdb
 #function definition
 #def conn(host,port,username,password):
@@ -33,24 +34,25 @@ class Sshclient:
         global last_worktime, last_idletime
 	stdin,stdout,stderr = self.ssh.exec_command("cat /proc/stat \n")
         pdb.set_trace()
-        line= stdout.read()
-
+        line1= stdout.read()
+        line2 =line1.re('.*?cpu0')
+	line = re.sub('\ncpu0',"",line2)
         """while not "cpu " in line:
-             line=f.readline()
+             line=f.readline()"""
 	d=line.split(" ")
 	worktime=int(d[2])+int(d[3])+int(d[4])
 	idletime=int(d[5])
 	dworktime=(worktime-last_worktime)
 	didletime=(idletime-last_idletime)
-	rate=float(dworktime)/(didletime+dworktime)
+	cpu_info=float(dworktime)/(didletime+dworktime)
 	last_worktime=worktime
 	last_idletime=idletime
 	if(last_worktime==0):
            return 0
 	else:
-           return rate
+           return cpu_info
         #cpu_info=stdout.read()
-        #return cpu_info"""
+        #return cpu_info
     
     def get_memoryutilization(self):
         stdin,stdout,stderr = self.ssh.exec_command("free -m")
@@ -58,8 +60,12 @@ class Sshclient:
         return memory_info
     
     def get_portstatistics(self):
-        stdin,stdout,stderr = self.ssh.exec_command("netstat")
-        port_info=stdout.readlines()
+        stdin,stdout,stderr = self.ssh.exec_command("ifconfig")
+        l1=stdout.readlines()
+	l2 =l1[3]
+	l3=l1[4]
+	return l2,l3
+	
         return port_info
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="validation for logging")
