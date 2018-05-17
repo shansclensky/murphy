@@ -42,4 +42,7 @@ feature: calculating lscpu from server # features/lscpu.feature:1
 9 steps passed, 0 failed, 0 skipped, 0 undefined
 Took 0m1.811s
 
-
+GIT REPOSITORY:
+https://github.com/shansclensky/murphy/blob/master/features/environment.py
+https://github.com/shansclensky/murphy/blob/master/features/lscpu.feature
+https://github.com/shansclensky/murphy/blob/master/features/steps/lscpu_info.py
