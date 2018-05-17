@@ -25,7 +25,6 @@ def step_impl(context):
     except(paramiko.ssh_exception.BadHostKeyException,IOError,paramiko.ssh_exception.AuthenticationException,paramiko.ssh_exception.SSHException,paramiko.ssh_exception.socket.error,socket.timeout) as e:
         status=2
         logger.info('Exception catched is: %s', e)
-        #print(e)
         assert_that(e==0,"{0}".format(e))
       
 
@@ -54,8 +53,7 @@ def step_impl(context):
     for l3 in list_l2:
         context.cpu_val[l3[0]]=l3[1:]
     logger.info(' RETRIVING  LSPCI CPU_NIC  INFO FROM REMOTE SERVER ...')
-    #context.ssh_conn.stdin,context.ssh_conn.stdout,context.ssh_conn.stderr=context.ssh_conn.exec_command(" lspci | grep Ethernet")
-    #context.nic_info.append(context.ssh_conn.stdout.read())
+
 @Then('feature {feature} with {availability}')
 def step_impl(context,feature,availability):
     #print(context.cpu_val)
@@ -63,13 +61,10 @@ def step_impl(context,feature,availability):
     feature1=context.cpu_val['Architecture']
     feature2=context.cpu_val['Model']
     feature3=context.cpu_val['L2cache']
-    #logger.info('CHECKING WHETHER RETRIVED LSPCI INFO IS EMPTY OR NOT ...')
-    #feature4=
-    #feature4=len(context.nic_info)
     assert_that(['x86_64'],equal_to(feature1),'architecture  not supported')
     assert_that(['13'],equal_to(feature2),'Model not supported')
     assert_that(['512K'],equal_to(feature3),'L2cache  not supported')
-    #assert_that(context.nic_info!=None,'NIC feature not detected')
+    
 
 
 
