@@ -5,7 +5,7 @@ Write a python module to spawn an openstack instance and fetch its CPU utilizati
 PREREQUISITES:
 python packages PYTHON OPENSTACK SDK'S
 PARAMIKO
-
+THE ENVIRONMENT VARIABLES SHOULD BE EXPORTED BY THE USER 
 
 
 PROCESS:
@@ -46,4 +46,6 @@ PORT_STATISTICS :{'lo': {'TX PACKETS': '0 bytes', 'RX PACKETS': '0 bytes'}, 'eth
 PACKETS': '194 bytes', 'RX PACKETS': '143 bytes'}}
 
 
-
+GIT REPOSITORY:
+https://github.com/shansclensky/murphy/blob/master/main.py
+https://github.com/shansclensky/murphy/blob/master/ssh_api.py
